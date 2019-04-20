@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.AreaTrabajo;
 import modelo.Contenedor;
 
 public class ContenedorServlet extends HttpServlet {
@@ -29,13 +30,16 @@ public class ContenedorServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 
             ArrayList<Contenedor> contenedores = new Contenedor().mostrarListaContenedor();
+            ArrayList<AreaTrabajo> areasTrabajo = new AreaTrabajo().mostrarListaAreaTrabajor();
             
             Contenedor contenedor = new Contenedor().buscarContenedor(9);
+            
             
             
             RequestDispatcher rd = request.getRequestDispatcher("/vista/contenedor.jsp");
             
             request.setAttribute("contenedores", contenedores);
+            request.setAttribute("areasTrabajo", areasTrabajo);
             request.setAttribute("contenedor", contenedor);
 
             rd.forward(request, response);

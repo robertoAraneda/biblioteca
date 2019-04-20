@@ -3,12 +3,16 @@
     Created on : Apr 19, 2019, 10:33:48 AM
     Author     : robar
 --%>
+<%@page import="modelo.AreaTrabajo"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Contenedor"%>
 <%
-    List<Contenedor> lista = (List<Contenedor>) request.getAttribute("contenedores");
-    Iterator<Contenedor> itContenedor = lista.iterator();
+    List<Contenedor> listaContenedor = (List<Contenedor>) request.getAttribute("contenedores");
+    List<AreaTrabajo> listaAreaTrabajo = (List<AreaTrabajo>) request.getAttribute("areasTrabajo");
+    
+    Iterator<Contenedor> itContenedor = listaContenedor.iterator();
+    Iterator<AreaTrabajo> itAreaTrabajo = listaAreaTrabajo.iterator();
 
 
 %>
@@ -73,6 +77,32 @@
                                 <td><%=contenedor.getAbreviacionContenedor()%></td>
                                 <td><%=contenedor.getDescripcionContenedor()%></td>
                                 <td><%=contenedor.getActivo()%></td>
+                            </tr>
+                            <%}%>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-striped">
+                    <table id="table1"  style="font-size: 14px; font-family: roboto;"class="table table-hover" onclick="addRowHandlers()" >
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">NOMBRE </th>
+                                <th scope="col">SECCION</th>
+                                <th scope="col">ESTADO</th>
+                            </tr>
+                        </thead>
+                        <tbody class="buscar">
+                            <%while (itAreaTrabajo.hasNext()) {
+                                    AreaTrabajo areaTrabajo = itAreaTrabajo.next();
+                            %>
+                            <tr>
+                                <td><%=areaTrabajo.getIdAreaTrabajo()%></td>
+                                <td><%=areaTrabajo.getDescripcionAreaTrabajo()%></td>
+                                <td><%=areaTrabajo.getSeccion().getDescripcionSeccion()%></td>
+                                <td><%=areaTrabajo.getActivo()%></td>
                             </tr>
                             <%}%>
 
